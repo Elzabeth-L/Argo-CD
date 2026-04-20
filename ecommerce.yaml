@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alph1
+kind: Application
+metadata:
+  name: e-commerce
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Elzabeth-L/E-Commerce-App.git
+    targetRevision: feature/ci-pipeline
+    path: ecommerce-microservices/release
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: clahanstore
+  syncPolicy:
+    automated:
+      prune: true
+      autoHeal: true
+    syncOptions: 
+      createNamespace=true
